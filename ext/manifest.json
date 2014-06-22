@@ -5,9 +5,9 @@
   "description": "What happens without net neutrality",
   "homepage_url": "http://opennews.org/",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "16": "icons/snail-icon-16.png",
+    "48": "icons/snail-icon-48.png",
+    "128": "icons/snail-icon-128.png"
   },
   "default_locale": "en",
   "content_scripts": [

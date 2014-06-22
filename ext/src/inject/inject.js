@@ -12,14 +12,19 @@ chrome.extension.sendMessage({}, function(response) {
         setup();
 
 
-        setTimeout(function(){showComcastPopup()},2000);
-          slowlyIncludeImages();
-          addSnailImg();
+        //setTimeout(function(){showComcastPopup()},2000);
+//          slowlyIncludeImages();
+ //         addSnailImg();
+//         slowScroll();
+          slowMouse();
+
         });
 	}
 	}, 10);
 });
 
+
+var yinit = 0;
 
 var setup= function(){
 
@@ -29,6 +34,8 @@ var setup= function(){
     $('body').append('<img id="comcast-popup" src="http://i.imgur.com/tWw60Iw.png">');
     $("#comcast-popup").hide();
 
+
+    $('body').append('<img id="mouse-img" src="http://i.imgur.com/2oYKqUM.png">');
 
     //snail animate side to side
     $("#snail-img").hide();
@@ -53,9 +60,36 @@ var slowlyIncludeImages = function(){
 
    var imgs = $('img');
    $.each(imgs, function(i, img){
-     $(img).hide();
+     $(img).data("src",img.src);
+     img.src = "http://i.imgur.com/9ErjBsv.gif";
      setTimeout(function(){
+       img.src = $(img).data("src");
        $(img).show();
-     },i*1000);
+     },i*1000*Math.random());
+   });
+
+}
+
+
+var slowScroll = function(){
+  $(window).on("scroll", function(){
+    var ypos = $(window).scrollTop();
+    var ydiff = (ypos - yinit)/50;
+    window.scrollTo(0,yinit+ydiff);
+     console.log('yay');
+     yinit = ypos;
+
+});
+
+}
+
+var slowMouse = function(){
+   $("#mouse-img").css("position","absolute");
+   $("#mouse-img").css("z-index","10");
+   $("#mouse-img").css("z-index","10");
+
+   $(window).on("mousemove", function(){
+     console.log('yay');
+     $("#mouse-img").css("z-index","10");
    });
 }
