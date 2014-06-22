@@ -9,14 +9,15 @@ chrome.extension.sendMessage({}, function(response) {
 		console.log("Hello. Scripts successfully injecteud ");
 		// ----------------------------------------------------------
 
+
+
+
+          slowlyIncludeImages();
         setup();
-
-
-        //setTimeout(function(){showComcastPopup()},2000);
-//          slowlyIncludeImages();
- //         addSnailImg();
-//         slowScroll();
+         slowScroll();
           slowMouse();
+          addSnailImg();
+        setTimeout(function(){showComcastPopup()},Math.random()*5000);
 
         });
 	}
@@ -25,6 +26,10 @@ chrome.extension.sendMessage({}, function(response) {
 
 
 var yinit = 0;
+var mousex=0;
+var mousey=0;
+var absMouseX=0;
+var absMouseY=0;
 
 var setup= function(){
 
@@ -46,6 +51,7 @@ var setup= function(){
 var showComcastPopup = function(){
     var a = $("#comcast-popup")[0]
     $(a).dialog();
+    setTimeout(function(){$(a).dialog("close")},2000);
 }
 
 var addSnailImg = function(){
@@ -72,6 +78,7 @@ var slowlyIncludeImages = function(){
 
 
 var slowScroll = function(){
+    yinit= $(window).scrollTop();
   $(window).on("scroll", function(){
     var ypos = $(window).scrollTop();
     var ydiff = (ypos - yinit)/50;
@@ -84,12 +91,28 @@ var slowScroll = function(){
 }
 
 var slowMouse = function(){
+
+   $("a").css("cursor","none");
    $("#mouse-img").css("position","absolute");
    $("#mouse-img").css("z-index","10");
-   $("#mouse-img").css("z-index","10");
+   $('body').css('cursor', 'none');
+    mousex = $(window).width()/2;
+     mousey = $(window).height()/2;
+     $("#mouse-img").css("left",mousex);
+     $("#mouse-img").css("top",mousey);
 
-   $(window).on("mousemove", function(){
-     console.log('yay');
-     $("#mouse-img").css("z-index","10");
+   setInterval(function(){
+     mousex += (absMouseX - mousex)/100;
+     mousey += (absMouseY - mousey)/100;
+     $("#mouse-img").css("left",mousex);
+     $("#mouse-img").css("top",mousey);
+   $('body').css('cursor', 'none');
+   },10);
+
+   $(window).on("mousemove", function(e){
+     absMouseX= e.pageX;
+     absMouseY= e.pageY;
    });
+
+
 }
