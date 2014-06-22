@@ -1,0 +1,32 @@
+{
+  "name": "The Slow Lane",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "What happens without net neutrality",
+  "homepage_url": "http://opennews.org/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "css": [
+        "js/bower_components/jqueryui/themes/base/jquery-ui.css",
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/bower_components/jquery/dist/jquery.js",
+        "js/bower_components/jqueryui/ui/jquery-ui.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources":[
+    "images/*"
+  ]
+}
