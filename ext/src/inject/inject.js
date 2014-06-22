@@ -51,7 +51,9 @@ var setup= function(){
 var showComcastPopup = function(){
     var a = $("#comcast-popup")[0]
     $(a).dialog();
-    setTimeout(function(){$(a).dialog("close")},2000);
+    setTimeout(function(){$(a).dialog("close")
+        setTimeout(function(){showComcastPopup()},2000+ Math.random()*7000);
+    },2000);
 }
 
 var addSnailImg = function(){
